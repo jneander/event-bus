@@ -1,0 +1,90 @@
+{
+  "name": "@jneander/event-bus",
+  "version": "1.0.0",
+  "description": "Event Bus",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:js && npm run build:types",
+    "build:js": "rollup -c",
+    "build:types": "tsc -p ./config/tsconfig.build.json",
+    "clean": "rimraf dist/*",
+    "lint:commits": "commitlint --from $(git symbolic-ref --short refs/remotes/origin/HEAD) --to HEAD",
+    "lint:eslint": "eslint .",
+    "lint:eslint:fix": "eslint --fix .",
+    "lint:prettier": "prettier --check .",
+    "lint:prettier:fix": "prettier --write .",
+    "prebuild": "npm run clean",
+    "prepare": "[ -z $CI ] && git config --local core.hooksPath .githooks || true",
+    "prepublishOnly": "npm run build",
+    "test": "mocha",
+    "test:types": "tsc --noEmit",
+    "test:types:watch": "tsc --noEmit --watch",
+    "test:watch": "nodemon -e ts --exec 'npm run test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jneander/event-bus"
+  },
+  "keywords": [
+    "event bus"
+  ],
+  "author": "Jeremy Neander <jeremy.neander@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jneander/event-bus/issues"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.0",
+    "@jneander/commitlint-config": "^1.0.1",
+    "@jneander/prettier-config": "^1.0.0",
+    "@jneander/semantic-release-config": "^1.0.1",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@types/sinon": "^10.0.0",
+    "@types/sinon-chai": "^3.2.9",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "chai": "^4.3.0",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^8.0.0",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-mocha": "^10.0.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "lint-staged": "^13.0.0",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.8.1",
+    "rollup": "^3.7.5",
+    "sinon": "^15.0.0",
+    "sinon-chai": "^3.7.0",
+    "ts-node": "^10.0.0",
+    "typescript": "^5.0.0"
+  },
+  "commitlint": {
+    "extends": "@jneander/commitlint-config"
+  },
+  "lint-staged": {
+    "*": "prettier --ignore-unknown --write",
+    "*.{cjs,js,ts}": "eslint"
+  },
+  "release": {
+    "extends": [
+      "@jneander/semantic-release-config"
+    ]
+  },
+  "prettier": "@jneander/prettier-config"
+}

@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "emitDeclarationOnly": true
+  },
+
+  "extends": "../tsconfig.json",
+  "include": ["../src"],
+  "exclude": ["../src/**/*.spec.ts", "../src/**/specs"]
+}
