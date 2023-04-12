@@ -16,7 +16,8 @@ export type EventInfo = {
 /**
  * A handler function used to subscribe to an event.
  */
-export type EventHandler = (data: unknown, eventInfo: EventInfo) => void
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type EventHandler = (data: any, eventInfo: EventInfo) => void
 
 /**
  * A function used to unsubscribe a handler from an event.
