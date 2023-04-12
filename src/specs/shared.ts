@@ -43,9 +43,11 @@ export function runEventBusExamples(createEventBusFn: () => IEventBus) {
 
     it('calls subscriber handlers with the given data', () => {
       const datum = [{example: true}]
-      eventBus.subscribe('event1', handler1)
+      let callData: typeof datum | null = null
+      eventBus.subscribe('event1', (arg: typeof datum) => {
+        callData = arg
+      })
       eventBus.publish('event1', datum)
-      const [callData] = handler1.lastCall.args
       expect(callData).to.equal(datum)
     })
 
